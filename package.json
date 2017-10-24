@@ -1,0 +1,39 @@
+{
+  "name": "next-time-tracker",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a Sails application",
+  "keywords": [],
+  "dependencies": {
+    "dominus": "^6.0.2",
+    "include-all": "^1.0.0",
+    "lodash": "^4.17.4",
+    "next": "^4.1.2",
+    "rc": "1.0.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-fontawesome": "^1.6.1",
+    "sails": "~0.12.8",
+    "sails-auth": "github:RasCarlito/sails-auth#6c7f56460715951ab7dac3a8135faef8931095c4",
+    "sails-disk": "~0.10.9",
+    "sails-hook-next": "^1.1.0",
+    "sails-mysql": "^0.11.5"
+  },
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "node app.js",
+    "lint": "standard | snazzy"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rascarlito/next-time-tracker.git"
+  },
+  "author": "rascarlito",
+  "license": "",
+  "devDependencies": {
+    "babel-plugin-module-resolver": "^2.7.1",
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.3"
+  }
+}
