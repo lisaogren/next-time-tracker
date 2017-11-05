@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import Icon from './icon'
-import Password from './password'
+import Password from './inputs/password'
 
 // ----------------------
 // Sub-components
@@ -38,7 +38,7 @@ function LoginError () {
 const Login = (props) => (
   <section className='section login-component'>
     <div className='container'>
-      <h1 className='title has-text-centered'>Connectes-toi à ton compte !</h1>
+      <h1 className='title has-text-centered'>Connecte-toi à ton compte !</h1>
       <hr />
       <form className='login'>
         <div className='columns'>

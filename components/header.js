@@ -30,11 +30,11 @@ const MainNav = () => (
 )
 
 const UserNav = (props) => {
-  // const user = get(props, 'user.data')
-  const user = {
-    username: 'RasCarlito',
-    gravatarUrl: 'https://gravatar.com/avatar/7bf738f0bc687f938e04450a8a36aacc'
-  }
+  const user = get(props, 'user.data')
+  // const user = {
+  //   username: 'RasCarlito',
+  //   gravatarUrl: 'https://gravatar.com/avatar/7bf738f0bc687f938e04450a8a36aacc'
+  // }
 
   if (user) {
     return (

@@ -1,24 +1,20 @@
 /**
- * Entry.js
+ * User.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
-module.exports = {
+const merge = require('lodash/merge')
+const _super = require('sails-auth/api/models/User')
+
+const User = {
   attributes: {
-    type: {
-      type: 'string',
-      enum: ['work', 'holiday']
-    },
-    start: {
-      type: 'datetime'
-    },
-    end: {
-      type: 'datetime'
-    },
-    user: {
-      model: 'user'
+    entries: {
+      collection: 'entry',
+      via: 'user'
     }
   }
 }
+
+module.exports = merge(_super, User)

@@ -1,5 +1,5 @@
 // import Link from 'next/link'
-// import fetch from 'isomorphic-unfetch'
+// import api from 'utils/api'
 
 import Layout from 'components/layout'
 import Welcome from 'components/welcome'
@@ -22,13 +22,11 @@ const Index = (props) => (
 )
 
 // Index.getInitialProps = async function () {
-//   console.log('meh')
-//   const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
-//   const data = await res.json()
+//   const response = await api.entries()
 
-//   console.log(`Show data fetched. Count: ${data.length}`)
+//   console.log(`Show data fetched.`, response)
 
-//   return { shows: data }
+//   return response.data
 // }
 
 export default Index
