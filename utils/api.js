@@ -83,4 +83,6 @@ forEach(config.services, (service, name) => {
   api[name] = partial(request, name)
 })
 
+if (typeof window !== 'undefined') window.api = api
+
 export default api

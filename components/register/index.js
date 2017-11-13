@@ -1,20 +1,34 @@
 import { Component } from 'react'
-import { Provider, observer } from 'mobx-react'
-
-import userStore from 'stores/user'
+import { observer, inject } from 'mobx-react'
 
 import RegisterForm from './form'
-import Success from './success'
+import RegisterFooter from './footer'
+import RegisterSuccess from './success'
 
-@observer
+@inject('userStore') @observer
 class Register extends Component {
+  constructor (props) {
+    super(props)
+    this.store = props.userStore
+  }
+
   render () {
     return (
-      <Provider userStore={userStore}>
-        <section className='section register-component'>
-          {userStore.registered ? <Success /> : <RegisterForm />}
-        </section>
-      </Provider>
+      <section className='section register-component'>
+        {this.store.registered ? <RegisterSuccess /> : this.form()}
+      </section>
+    )
+  }
+
+  form () {
+    return (
+      <div className='container'>
+        <h1 className='title has-text-centered'>Créer ton compte !</h1>
+        <hr />
+        <RegisterForm />
+        <hr />
+        <RegisterFooter />
+      </div>
     )
   }
 }

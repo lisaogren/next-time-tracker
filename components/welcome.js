@@ -19,7 +19,7 @@ const Welcome = () => (
           <div className='card'>
             <div className='card-content'>
               <div className='media'>
-                <Icon name='clock-o' />
+                <Icon name='clock-o' fontSize='8rem' />
               </div>
               <div className='content'>
                 Système start/stop simple. Aucune perte de temps
@@ -31,7 +31,7 @@ const Welcome = () => (
           <div className='card'>
             <div className='card-content'>
               <div className='media'>
-                <Icon name='area-chart' />
+                <Icon name='area-chart' fontSize='8rem' />
               </div>
               <div className='content'>
                 Résumé pratique pour rapidement savoir ta situation
@@ -43,7 +43,7 @@ const Welcome = () => (
           <div className='card'>
             <div className='card-content'>
               <div className='media'>
-                <Icon name='table' />
+                <Icon name='table' fontSize='8rem' />
               </div>
               <div className='content'>
                 Détails éditable facile à naviguer pour les plus pointilleux
@@ -60,15 +60,11 @@ const Welcome = () => (
 
       .media {
         justify-content: center;
-      }
 
-      .media .icon {
-        width: auto;
-        height: auto;
-      }
-
-      .media .icon .fa {
-        font-size: 8rem;
+        .icon {
+          width: auto;
+          height: auto;
+        }
       }
     `}</style>
   </section>

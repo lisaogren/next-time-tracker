@@ -5,7 +5,7 @@ import { observer, inject } from 'mobx-react'
 import Icon from 'components/icon'
 
 @inject('userStore') @observer
-class Success extends Component {
+class RegisterSuccess extends Component {
   constructor (props) {
     super(props)
 
@@ -35,4 +35,4 @@ class Success extends Component {
   }
 }
 
-export default Success
+export default RegisterSuccess

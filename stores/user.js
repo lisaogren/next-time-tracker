@@ -16,6 +16,10 @@ class UserStore {
   // Computations
   // ----------------
 
+  @computed get user () {
+    return this.data.user
+  }
+
   @computed get username () {
     return this.data.user.username
   }
@@ -24,8 +28,16 @@ class UserStore {
     return gravatar.url(this.data.user.email)
   }
 
+  @computed get loggedIn () {
+    return this.data.loggedIn
+  }
+
   @computed get registered () {
     return this.data.register.success
+  }
+
+  @computed get login () {
+    return this.data.login
   }
 
   // @computed get hasError () {
@@ -37,7 +49,7 @@ class UserStore {
   //   }
   // }
 
-  hasError = createTransformer(attr => {
+  hasRegisterError = createTransformer(attr => {
     const invalidation = first(this.data.register.invalidAttributes[attr])
     attr = attr === 'username' ? 'User' : upperFirst(attr)
 
@@ -51,18 +63,17 @@ class UserStore {
   // ----------------
 
   @action register = async ({ username, email, password }) => {
-    let response
     const data = { username, email, password }
 
     try {
-      response = await api.register({ data })
+      const response = await api.register({ data })
 
       this.data.user = response.data
       this.data.register.success = true
     } catch (err) {
       console.log('Register error', err.response)
 
-      const reason = err.response.data
+      const reason = get(err, 'response.data')
 
       this.data.register.error = true
 
@@ -72,14 +83,56 @@ class UserStore {
     }
   }
 
+  @action login = async ({ identifier, password }) => {
+    const data = { identifier, password }
+
+    try {
+      const response = await api.login({ data })
+
+      this.data.user = response.data
+      this.data.loggedIn = true
+    } catch (err) {
+      console.log('Login error', err.response)
+
+      // todo: Display technical error
+    }
+  }
+
+  @action logout = async () => {
+    try {
+      await api.logout()
+
+      this.data.user = null
+      this.data.loggedIn = false
+    } catch (err) {
+      console.log('Logout error', err.response)
+
+      // todo: Display technical error
+    }
+  }
+
+  @action me = async () => {
+    const response = await api.me()
+
+    this.data.user = response.data
+
+    if (this.data.user) {
+      this.data.loggedIn = true
+    }
+  }
+
   @action reset () {
     this.data = {
+      loggedIn: false,
       user: null,
       register: {
         success: false,
         error: null,
-        invalidAttributes: {},
-        data: {}
+        invalidAttributes: {}
+      },
+      login: {
+        success: false,
+        error: null
       }
     }
   }
