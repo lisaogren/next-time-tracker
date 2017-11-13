@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import { inject } from 'mobx-react'
 
 @inject('userStore')
 class LoginError extends Component {
@@ -14,7 +15,8 @@ class LoginError extends Component {
         : this.technicalError()
 
       return (
-        <div className='notification is-warning login-error' dangerouslySetInnerHtml={{ __html: message }}>
+        <div className='notification is-warning login-error'>
+          <span>{message}</span>
           <style jsx>{`
             .login-error {
               padding: 0.5rem;

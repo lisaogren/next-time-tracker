@@ -1,16 +1,15 @@
 import { Component } from 'react'
 
-// import userStore from 'stores/user'
-
+import { Container } from 'components/bulma'
 import Header from './header'
 
 class Layout extends Component {
   render () {
     return (
-      <div className='container'>
+      <Container fluid>
         <Header />
         {this.props.children}
-      </div>
+      </Container>
     )
   }
 }

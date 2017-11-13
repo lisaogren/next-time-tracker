@@ -14,15 +14,17 @@ class Register extends Component {
 
   render () {
     return (
-      <section className='section register-component'>
-        {this.store.registered ? <RegisterSuccess /> : this.form()}
+      <section className='section'>
+        <div className='container register-component'>
+          {this.store.registered ? <RegisterSuccess /> : this.form()}
+        </div>
       </section>
     )
   }
 
   form () {
     return (
-      <div className='container'>
+      <div>
         <h1 className='title has-text-centered'>Créer ton compte !</h1>
         <hr />
         <RegisterForm />

@@ -1,13 +1,18 @@
 import { Component } from 'react'
+import classnames from 'classnames'
 
-import NavItem from './nav-item'
+import NavItem from 'components/nav/item'
 
 class Brand extends Component {
   render () {
+    const burgerClasses = classnames('navbar-burger', 'burger', {
+      'is-active': this.props.opened
+    })
+
     return (
       <div className='navbar-brand'>
         <NavItem label='Time Tracker' icon='clock-o' href='/' />
-        <div className='navbar-burger burger' data-target='#time-tracker-nav'>
+        <div className={burgerClasses} onClick={this.props.toggle}>
           <span />
           <span />
           <span />

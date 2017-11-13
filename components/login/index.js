@@ -11,8 +11,8 @@ class Login extends Component {
   render () {
     return (
       <Provider userStore={userStore}>
-        <section className='section login-component'>
-          <div className='container'>
+        <section className='section'>
+          <div className='container login-component'>
             <h1 className='title has-text-centered'>Connecte-toi à ton compte !</h1>
             <hr />
             <LoginForm />

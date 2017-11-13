@@ -1,41 +1,12 @@
 import { Component } from 'react'
-import { observer, inject } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 
-import NavItem from './nav-item'
+import NavItem from './item'
 
 @inject('userStore') @observer
-class Nav extends Component {
-  constructor (props) {
-    super(props)
-    this.store = props.userStore
-  }
-
-  componentWillMount () {
-    this.store.me()
-  }
-
+class UserNav extends Component {
   render () {
-    return (
-      <div id='time-tracker-nav' className='navbar-menu'>
-        {this.mainNav()}
-        <div className='navbar-end'>
-          {this.userNav()}
-        </div>
-      </div>
-    )
-  }
-
-  mainNav () {
-    return (
-      <div className='navbar-start'>
-        <NavItem label='Résumé' icon='area-chart' href='/' />
-        <NavItem label='Détails' icon='table' href='/details' />
-      </div>
-    )
-  }
-
-  userNav () {
-    const { loggedIn, user } = this.store
+    const { loggedIn, user } = this.props.userStore
 
     if (loggedIn && user) {
       return (
@@ -49,11 +20,20 @@ class Nav extends Component {
             </div>
           </a>
 
-          <div className='navbar-dropdown'>
+          <div className='navbar-dropdown is-right'>
             <NavItem label='Paramètres' icon='cog' href='/settings' />
             <hr className='navbar-divider' />
             <NavItem label='Déconnexion' icon='sign-out' onClick={this.logout} />
           </div>
+          <style jsx>{`
+            .field.is-grouped {
+              align-items: center;
+
+              span {
+                margin-left: .5rem;
+              }
+            }
+          `}</style>
         </div>
       )
     }
@@ -64,8 +44,8 @@ class Nav extends Component {
   }
 
   logout = (e) => {
-    this.store.logout()
+    this.props.userStore.logout()
   }
 }
 
-export default Nav
+export default UserNav

@@ -1,10 +1,23 @@
+import { Component } from 'react'
+import { observer } from 'mobx-react'
+
+import userStore from 'stores/user'
+
 import Layout from 'components/layout'
 import Welcome from 'components/welcome'
+import Dashboard from 'components/dashboard'
 
-const Index = (props) => (
-  <Layout>
-    <Welcome />
-  </Layout>
-)
+@observer
+class IndexPage extends Component {
+  render () {
+    const { loggedIn } = userStore
 
-export default Index
+    return (
+      <Layout>
+        {loggedIn ? <Dashboard /> : <Welcome />}
+      </Layout>
+    )
+  }
+}
+
+export default IndexPage

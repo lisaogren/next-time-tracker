@@ -7,6 +7,7 @@
   "dependencies": {
     "axios": "^0.17.0",
     "bluebird": "^3.5.1",
+    "bulma": "^0.6.1",
     "classnames": "^2.2.5",
     "dominus": "^6.0.2",
     "form-serialize": "^0.7.2",

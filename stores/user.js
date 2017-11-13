@@ -1,3 +1,4 @@
+import Router from 'next/router'
 import { observable, computed, action, createTransformer } from 'mobx'
 
 import { get, first, upperFirst } from 'lodash'
@@ -91,6 +92,8 @@ class UserStore {
 
       this.data.user = response.data
       this.data.loggedIn = true
+
+      Router.push('/')
     } catch (err) {
       console.log('Login error', err.response)
 
@@ -104,6 +107,8 @@ class UserStore {
 
       this.data.user = null
       this.data.loggedIn = false
+
+      Router.push('/')
     } catch (err) {
       console.log('Logout error', err.response)
 

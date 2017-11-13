@@ -11,7 +11,7 @@ class LoginFooter extends Component {
         <p>
           <span>Pas de problème !</span>
           <Link href='/register'>
-            <a className='register-link'>
+            <a className='register-link is-primary'>
               <span>Créer ton compte en quelques secondes</span>
               <Icon name='arrow-right' fontSize='1rem' />
             </a>

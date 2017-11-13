@@ -42,6 +42,11 @@ class RegisterForm extends Component {
             </div>
           </div>
         </div>
+        <style jsx>{`
+          .control.actions {
+            text-align: center;
+          }
+        `}</style>
       </form>
     )
   }

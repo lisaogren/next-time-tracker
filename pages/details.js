@@ -1,8 +1,8 @@
 import Layout from 'components/layout'
-import About from 'components/about'
+import Details from 'components/details'
 
 export default () => (
   <Layout>
-    <About />
+    <Details />
   </Layout>
 )
