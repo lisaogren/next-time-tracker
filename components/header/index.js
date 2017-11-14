@@ -3,7 +3,7 @@ import { Component } from 'react'
 import { Provider } from 'mobx-react'
 import nprogress from 'nprogress'
 
-import userStore from 'stores/user'
+import { userStore } from 'stores'
 
 import Brand from './brand'
 import Nav from 'components/nav'
@@ -19,10 +19,6 @@ class Header extends Component {
     this.state = {
       opened: false
     }
-  }
-
-  componentWillMount () {
-    userStore.me()
   }
 
   render () {

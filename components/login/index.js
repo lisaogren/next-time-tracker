@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { Provider, observer } from 'mobx-react'
 
-import userStore from 'stores/user'
+import { userStore } from 'stores'
 
 import LoginForm from './form'
 import LoginFooter from './footer'

@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { observer } from 'mobx-react'
 
-import userStore from 'stores/user'
+import { userStore } from 'stores'
 
 import Layout from 'components/layout'
 import Welcome from 'components/welcome'

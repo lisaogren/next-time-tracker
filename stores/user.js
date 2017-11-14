@@ -1,16 +1,19 @@
 import Router from 'next/router'
 import { observable, computed, action, createTransformer } from 'mobx'
 
-import { get, first, upperFirst } from 'lodash'
+import { get, first, upperFirst, isFunction } from 'lodash'
 
 import api from 'utils/api'
 import gravatar from 'utils/gravatar'
 
 class UserStore {
+  appStore = null
+
   @observable data = {}
 
-  constructor () {
+  constructor (appStore) {
     this.reset()
+    this.app = appStore
   }
 
   // ----------------
@@ -93,7 +96,9 @@ class UserStore {
       this.data.user = response.data
       this.data.loggedIn = true
 
-      Router.push('/')
+      this.me(() => {
+        Router.push('/')
+      })
     } catch (err) {
       console.log('Login error', err.response)
 
@@ -116,14 +121,19 @@ class UserStore {
     }
   }
 
-  @action me = async () => {
+  @action me = async (cb) => {
     const response = await api.me()
 
     this.data.user = response.data
 
     if (this.data.user) {
       this.data.loggedIn = true
+
+      // Pass user entries along to the timer store
+      this.app.timerStore.data.entries = this.user.entries
     }
+
+    if (isFunction(cb)) cb()
   }
 
   @action reset () {
@@ -143,7 +153,5 @@ class UserStore {
   }
 }
 
-const store = new UserStore()
-
-export { store as userStore, UserStore }
-export default store
+export { UserStore }
+export default UserStore

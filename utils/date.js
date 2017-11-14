@@ -1,8 +1,4 @@
-import parseInt from 'lodash/parseInt'
-import filter from 'lodash/filter'
-import extend from 'lodash/extend'
-import forEach from 'lodash/forEach'
-import partialRight from 'lodash/partialRight'
+import { parseInt, filter, extend, partialRight, reduce, find } from 'lodash'
 
 import flatpickr from 'flatpickr'
 import flatpickrLocale from 'flatpickr/dist/l10n/fr'
@@ -15,10 +11,10 @@ import getYear from 'date-fns/get_year'
 import addDays from 'date-fns/add_days'
 import eachDay from 'date-fns/each_day'
 import differenceInMilliseconds from 'date-fns/difference_in_milliseconds'
+import subDays from 'date-fns/sub_days'
+import isSameDay from 'date-fns/is_same_day'
 
 import frLocale from 'date-fns/locale/fr'
-
-import { isEven } from './numbers'
 
 const oneHourInMilliseconds = 1 * 60 * 60 * 1000
 const oneMinuteInMilliseconds = 1 * 60 * 1000
@@ -129,19 +125,25 @@ export function getWorkTimeBalance (entries, start, end) {
 }
 
 export function getCumulatedWorkTime (entries) {
-  let done = 0
+  return reduce(entries, (result, entry) => {
+    let { start, end } = entry
 
-  forEach(entries, (entry, i) => {
-    let next = entries[i + 1]
+    if (!end) end = new Date()
 
-    if (!next) next = { date: new Date() }
+    result += differenceInMilliseconds(end, start)
 
-    if (isEven(i)) {
-      done += differenceInMilliseconds(next.date, entry.date)
-    }
-  })
+    return result
+  }, 0)
+}
 
-  return done
+export function findPreviousWorkedDay (start, entries) {
+  start = subDays(start, 1)
+
+  if (!isWorkDay(start) || !find(entries, entry => isSameDay(entry.start, start))) {
+    return findPreviousWorkedDay(start, entries)
+  }
+
+  return start
 }
 
 export function getEasterByYear (year) {
