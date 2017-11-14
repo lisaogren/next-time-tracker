@@ -23,13 +23,16 @@ export default class MainDocument extends Document {
           <link rel='manifest' href='manifest.json' />
 
           <link rel='stylesheet' href='/static/css/font-awesome/css/font-awesome.css' />
-          <link rel='stylesheet' href='/static/css/bulma.css' />
           <link rel='stylesheet' href='/static/css/nprogress.css' />
+          <link rel='stylesheet' href='/static/css/flatpickr.min.css' />
         </Head>
         <body>
           {this.props.customValue}
           <Main />
           <NextScript />
+          <style jsx global>{`
+            @import 'node_modules/bulma/bulma.sass';
+          `}</style>
         </body>
       </html>
     )
