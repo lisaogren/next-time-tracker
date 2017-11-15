@@ -3,11 +3,12 @@ import partial from 'lodash/partial'
 import http from 'axios'
 import urlComposer from 'url-composer'
 
+const host = process.env.NODE_ENV === 'production'
+  ? 'https://time-tracker.carlogren.com'
+  : 'http://localhost:1337'
+
 const config = {
-  // @TODO Move to a config file
-  host: 'http://localhost:1337',
-  // host: 'http://time-tracker.localhost',
-  // host: 'https://time-tracker.carlogren.com',
+  host,
   services: {
     login: {
       path: '/auth/local',
