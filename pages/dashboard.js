@@ -1,16 +1,16 @@
 import { Component } from 'react'
 
 import Layout from 'components/layout'
-import Welcome from 'components/welcome'
+import Dashboard from 'components/dashboard'
 
-class IndexPage extends Component {
+class DashboardPage extends Component {
   render () {
     return (
       <Layout>
-        <Welcome />
+        <Dashboard />
       </Layout>
     )
   }
 }
 
-export default IndexPage
+export default DashboardPage

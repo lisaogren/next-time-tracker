@@ -46,7 +46,15 @@ module.exports.connections = {
     user: 'root', // optional
     password: 'root', // optional
     database: 'next_time_tracker' // optional
-  }
+  },
+
+  productionMysqlServer: {
+    adapter: 'sails-mysql',
+    host: process.env.TIME_TRACKER_DB_HOST,
+    user: process.env.TIME_TRACKER_DB_USER,
+    password: process.env.TIME_TRACKER_DB_PWD,
+    database: process.env.TIME_TRACKER_DB_NAME
+  },
 
   /***************************************************************************
   *                                                                          *

@@ -7,7 +7,6 @@ import isToday from 'date-fns/is_today'
 import isSameDay from 'date-fns/is_same_day'
 import { getWorkTimeBalance, findPreviousWorkedDay, getCumulatedWorkTime } from 'utils/date'
 
-import Icon from 'components/icon'
 import Balance from 'components/balance'
 
 @inject('timerStore') @observer
@@ -20,13 +19,6 @@ class Summary extends Component {
   render () {
     return (
       <div>
-        <h1 className='title has-text-centered'>
-          <Icon name='area-chart' size='medium' />
-          <span>Résumé</span>
-        </h1>
-
-        <hr />
-
         <h2 className='subtitle'>
           Heures Supp'
         </h2>
@@ -102,8 +94,8 @@ class Summary extends Component {
       end = lastEntry.end || now
 
       if (!isSameDay(lastEntry.start, firstEntry.start)) {
-        end = findPreviousWorkedDay(lastEntry.start, entries)
-        entries = filter(entries, entry => !isSameDay(entry.start, lastEntry.start))
+        end = findPreviousWorkedDay(now, entries)
+        entries = filter(entries, entry => !isSameDay(entry.start, now))
       }
     }
 

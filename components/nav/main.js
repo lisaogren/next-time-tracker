@@ -12,7 +12,7 @@ class MainNav extends Component {
 
     return (
       <div className='navbar-start'>
-        <NavItem label='Résumé' icon='area-chart' href='/' />
+        <NavItem label='Résumé' icon='area-chart' href='/dashboard' />
         <NavItem label='Détails' icon='table' href='/details' />
       </div>
     )

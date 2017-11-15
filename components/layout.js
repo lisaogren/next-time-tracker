@@ -1,7 +1,8 @@
 import { Component } from 'react'
 import { observer } from 'mobx-react'
+import DevTools from 'mobx-react-devtools'
 
-import { appStore as app } from 'stores'
+// import { appStore as app } from 'stores'
 
 import { Container } from 'components/bulma'
 import Header from './header'
@@ -20,6 +21,7 @@ class Layout extends Component {
       <Container fluid>
         <Header />
         {this.props.children}
+        {process.env.NODE_ENV !== 'production' ? <DevTools /> : null}
       </Container>
     )
   }
