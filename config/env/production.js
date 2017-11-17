@@ -25,7 +25,7 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: 2345,
+  port: 1337,
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
@@ -36,9 +36,9 @@ module.exports = {
   // }
 
   models: {
-    connection: 'productionMysqlServer'
+    connection: 'developmentMysqlServer'
   },
 
-  appUrl: 'https://time-tracker.carlogren.com'
+  appUrl: 'http://localhost:1337'
 
 }

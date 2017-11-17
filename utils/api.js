@@ -40,7 +40,7 @@ const config = {
     },
     deleteEntry: {
       path: '/api/entries/:id',
-      method: 'del'
+      method: 'delete'
     }
   }
 }

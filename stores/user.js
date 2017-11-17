@@ -7,14 +7,18 @@ import api from 'utils/api'
 import gravatar from 'utils/gravatar'
 
 class UserStore {
-  appStore = null
-
-  @observable data = {}
-
   constructor (appStore) {
     this.reset()
     this.app = appStore
   }
+
+  // ----------------
+  // Data
+  // ----------------
+
+  app = null
+
+  @observable data = {}
 
   // ----------------
   // Computations
@@ -34,6 +38,10 @@ class UserStore {
 
   @computed get loggedIn () {
     return this.data.loggedIn
+  }
+
+  @computed get loaded () {
+    return this.data.loaded
   }
 
   @computed get registered () {
@@ -97,7 +105,7 @@ class UserStore {
       this.data.loggedIn = true
 
       this.me(() => {
-        Router.push('/')
+        Router.push('/dashboard')
       })
     } catch (err) {
       console.log('Login error', err.response)
@@ -125,12 +133,13 @@ class UserStore {
     const response = await api.me()
 
     this.data.user = response.data
+    this.data.loaded = true
 
     if (this.data.user) {
       this.data.loggedIn = true
 
       // Pass user entries along to the timer store
-      this.app.timerStore.data.entries = this.user.entries
+      this.app.timerStore.setEntries(this.user.entries)
     }
 
     if (isFunction(cb)) cb()
@@ -138,6 +147,7 @@ class UserStore {
 
   @action reset () {
     this.data = {
+      loaded: false,
       loggedIn: false,
       user: null,
       register: {
