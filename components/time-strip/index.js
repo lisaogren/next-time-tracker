@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { inject } from 'mobx-react'
-import { forEach, range } from 'lodash'
+import { forEach, range, partial } from 'lodash'
 import { setHours, startOfDay } from 'date-fns'
 import classnames from 'classnames'
 
@@ -58,7 +58,7 @@ class TimeStrip extends Component {
     )
   }
 
-  workBlock (block) {
+  workBlock = (block) => {
     const left = `${block.left}%`
     const width = `${block.width}%`
 
@@ -70,6 +70,7 @@ class TimeStrip extends Component {
         data-type='worked'
         style={{ left, width }}
         title='Click pour modifier cette période'
+        onClick={partial(this.edit, block.entry)}
       >
         <style jsx>{`
           .worked {
@@ -80,6 +81,7 @@ class TimeStrip extends Component {
             flex-basis: unset;
             padding: 0;
             height: 100%;
+            cursor: pointer;
           }
         `}</style>
       </div>
@@ -102,7 +104,7 @@ class TimeStrip extends Component {
     )
   }
 
-  scaleBlock (i) {
+  scaleBlock = (i) => {
     const classes = classnames('column', {
       'is-hidden': i < 6 || i > 19
     })
@@ -118,6 +120,11 @@ class TimeStrip extends Component {
         `}</style>
       </div>
     )
+  }
+
+  edit = (entry, e) => {
+    e.stopPropagation()
+    this.timer.edit(entry)
   }
 }
 

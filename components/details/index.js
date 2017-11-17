@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { Provider } from 'mobx-react'
+import { Provider, observer } from 'mobx-react'
 
 import { timerStore } from 'stores'
 
@@ -7,7 +7,9 @@ import { Section, Container } from 'components/bulma'
 import Icon from 'components/icon'
 
 import DetailsList from './list'
+import DetailsEdit from './edit'
 
+@observer
 class Details extends Component {
   render () {
     return (
@@ -30,6 +32,8 @@ class Details extends Component {
                 <DetailsList />
               </tbody>
             </table>
+            {timerStore.adding ? <DetailsEdit add={timerStore.adding} /> : null}
+            {timerStore.editing ? <DetailsEdit edit={timerStore.editing} /> : null}
           </Container>
         </Section>
       </Provider>

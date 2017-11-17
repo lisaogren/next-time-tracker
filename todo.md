@@ -18,7 +18,7 @@
 
 ## Details
 * [x] Create time-strip component
-* [ ] Add/Edit modal w/ flatpickr
+* [x] Add/Edit modal w/ flatpickr
 * [x] Preset actions: Set normal work day, delete all day data
 * [x] Extract button generating an Excel file
 
