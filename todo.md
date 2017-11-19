@@ -15,7 +15,7 @@
 * [ ] Catch and display technical errors e.g. network problems
 
 ## Dashboard
-* [ ] Find better french name
+* [ ] Find better name
 * [x] Listen to spacebar to start/stop timer
 * [ ] Display counter in real-time with a setInterval
 * [ ] Smart detection of timer staying on all night

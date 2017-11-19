@@ -1,7 +1,6 @@
 import { Component } from 'react'
 import classnames from 'classnames'
 
-import MainNav from './main'
 import UserNav from './user'
 
 class Nav extends Component {
@@ -12,7 +11,6 @@ class Nav extends Component {
 
     return (
       <div id='time-tracker-nav' className={menuClasses}>
-        <MainNav />
         <div className='navbar-end'>
           <UserNav />
         </div>

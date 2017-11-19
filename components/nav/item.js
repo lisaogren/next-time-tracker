@@ -26,15 +26,20 @@ class NavItem extends Component {
   }
 
   content () {
-    const { label = '', onClick = null, icon } = this.props
+    const { label = '', onClick = null, icon, mobile, hideDesktop, hideMobile } = this.props
     const classes = classnames('navbar-item', {
-      'is-active': this.state.isActive
+      'is-active': this.state.isActive,
+      'is-hidden-desktop': hideDesktop,
+      'is-hidden-mobile': hideMobile
+    })
+    const labelClasses = classnames({
+      'is-hidden-mobile': mobile
     })
 
     return (
       <a className={classes} onClick={onClick}>
         {icon ? <Icon name={icon} size='small' /> : ''}
-        <span>{label}</span>
+        <span className={labelClasses}>{label}</span>
         <style jsx>{`
           span {
             margin-left: .5rem;
