@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 
@@ -11,14 +12,16 @@ class UserNav extends Component {
     if (loggedIn && user) {
       return (
         <div className='navbar-item has-dropdown is-hoverable user-nav'>
-          <a href='/profile' className='navbar-link'>
-            <div className='field is-grouped'>
-              <figure className='image is-16x16'>
-                <img src={user.gravatarUrl} alt='' title='' />
-              </figure>
-              <span>{user.username}</span>
-            </div>
-          </a>
+          <Link href='/profile'>
+            <a className='navbar-link'>
+              <div className='field is-grouped'>
+                <figure className='image is-16x16'>
+                  <img src={user.gravatarUrl} alt='' title='' />
+                </figure>
+                <span>{user.username}</span>
+              </div>
+            </a>
+          </Link>
 
           <div className='navbar-dropdown is-right'>
             <NavItem label='Paramètres' icon='cog' href='/settings' />

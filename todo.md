@@ -1,7 +1,7 @@
 # Todo
 
 ## Global
-* [ ] Favicon
+* [x] Favicon
 
 ## Home
 * [ ] Customize page for logged in user
@@ -21,6 +21,7 @@
 * [x] Add/Edit modal w/ flatpickr
 * [x] Preset actions: Set normal work day, delete all day data
 * [x] Extract button generating an Excel file
+* [ ] Year/Month selector
 
 ## Settings
 * [ ] Configure normal work day entries

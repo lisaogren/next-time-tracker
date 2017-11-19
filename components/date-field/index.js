@@ -7,6 +7,11 @@ class DateField extends Component {
   render () {
     const { label, date } = this.props
 
+    const options = {
+      enableTime: true,
+      time_24hr: true
+    }
+
     return (
       <div className='field is-horizontal'>
         <div className='field-label is-normal'>
@@ -15,7 +20,7 @@ class DateField extends Component {
         <div className='field-body'>
           <div className='field'>
             <div className='control'>
-              <Flatpickr className='input' value={date} onChange={date => this.props.onChange(first(date))} options={{ enableTime: true }} />
+              <Flatpickr className='input' value={date} onChange={date => this.props.onChange(first(date))} options={options} />
             </div>
           </div>
         </div>

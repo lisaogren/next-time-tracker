@@ -25,7 +25,7 @@ class UserStore {
   // ----------------
 
   @computed get user () {
-    return this.data.user
+    return this.data.user || {}
   }
 
   @computed get username () {
