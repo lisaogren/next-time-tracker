@@ -16,7 +16,7 @@
 
 ## Dashboard
 * [ ] Find better french name
-* [ ] Listen to spacebar to start/stop timer
+* [x] Listen to spacebar to start/stop timer
 * [ ] Display counter in real-time with a setInterval
 * [ ] Smart detection of timer staying on all night
 
@@ -26,6 +26,7 @@
 * [x] Preset actions: Set normal work day, delete all day data
 * [x] Extract button generating an Excel file
 * [ ] Year/Month selector
+* [ ] Display current entry data adding a `Date.now()` to the `end` attribute to make it visualizable
 
 ## Settings
 * [ ] Configure normal work day entries
