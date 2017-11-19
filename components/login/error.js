@@ -1,7 +1,9 @@
 import { Component } from 'react'
-import { inject } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 
-@inject('userStore')
+import Icon from 'components/icon'
+
+@inject('userStore') @observer
 class LoginError extends Component {
   constructor (props) {
     super(props)
@@ -9,17 +11,32 @@ class LoginError extends Component {
   }
 
   render () {
-    if (this.store.login.error) {
-      const message = this.store.user.login.error === 'functional'
-        ? (<span>Connexion impossible...<br />T'as dû te tromper d'identiant</span>)
+    if (this.store.data.login.error) {
+      const message = this.store.data.login.error === 'functional'
+        ? this.functionalError()
         : this.technicalError()
 
       return (
         <div className='notification is-warning login-error'>
-          <span>{message}</span>
+          <span>
+            <span className='icon-container'>
+              <Icon name='frown-o' fontSize='2rem' />
+            </span>
+            {message}
+          </span>
           <style jsx>{`
             .login-error {
-              padding: 0.5rem;
+              padding: .5rem;
+
+              > span {
+                display: flex;
+                align-items: center;
+
+                .icon-container {
+                  margin-left: .5rem;
+                  margin-right: 1rem;
+                }
+              }
             }
           `}</style>
         </div>
@@ -29,8 +46,21 @@ class LoginError extends Component {
     return null
   }
 
+  functionalError () {
+    return (
+      <span>
+        Connexion impossible...<br />T'as dû te tromper d'identiant
+      </span>
+    )
+  }
+
   technicalError () {
-    return null
+    return (
+      <span>
+        Un problème technique est survenu...<br />
+        Impossible de te connecter à ton compte Time Tracker pour le moment
+      </span>
+    )
   }
 }
 

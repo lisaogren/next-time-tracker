@@ -7,8 +7,12 @@
 * [ ] Customize page for logged in user
 
 ## Login
-* [ ] Display login errors
+* [x] Display login errors
 * [ ] Create forgot password procedure
+* [ ] Validate email after login
+
+## Register
+* [ ] Catch and display technical errors e.g. network problems
 
 ## Dashboard
 * [ ] Find better french name

@@ -40,16 +40,16 @@ class UserStore {
     return this.data.loggedIn
   }
 
+  @computed get loginError () {
+    return this.data.login.error
+  }
+
   @computed get loaded () {
     return this.data.loaded
   }
 
   @computed get registered () {
     return this.data.register.success
-  }
-
-  @computed get login () {
-    return this.data.login
   }
 
   // @computed get hasError () {
@@ -74,6 +74,10 @@ class UserStore {
   // Actions
   // ----------------
 
+  @action resetLoginError () {
+    this.data.login.error = null
+  }
+
   @action register = async ({ username, email, password }) => {
     const data = { username, email, password }
 
@@ -83,8 +87,6 @@ class UserStore {
       this.data.user = response.data
       this.data.register.success = true
     } catch (err) {
-      console.log('Register error', err.response)
-
       const reason = get(err, 'response.data')
 
       this.data.register.error = true
@@ -108,9 +110,13 @@ class UserStore {
         Router.push('/dashboard')
       })
     } catch (err) {
-      console.log('Login error', err.response)
+      const { response } = err
 
-      // todo: Display technical error
+      if (response.status === 403) {
+        this.data.login.error = 'functional'
+      } else {
+        this.data.login.error = 'technical'
+      }
     }
   }
 
@@ -156,7 +162,6 @@ class UserStore {
         invalidAttributes: {}
       },
       login: {
-        success: false,
         error: null
       }
     }

@@ -1,50 +1,60 @@
-import $ from 'dominus'
+import { Component } from 'react'
+import { isFunction } from 'lodash'
 import classnames from 'classnames'
+
 import ErrorMsg from './error-msg'
 
-const Password = (props) => {
-  const inputClassNames = classnames('input', { 'is-danger': props.error })
+class Password extends Component {
+  constructor (props) {
+    super(props)
 
-  return (
-    <div className='field password-component'>
-      <label className='label'>Mot de passe</label>
-      <p className='control has-icons-right'>
-        <input type='password' name='password' className={inputClassNames} placeholder='1 m0t D3 PaSs3 Tr3s C0mpL!qu3' required />
-        <a className='icon is-small is-right' onClick={toggle}>
-          <i className='fa fa-eye' />
-        </a>
-      </p>
-      {
-        props.error
-          ? <ErrorMsg message={props.error} />
-          : ''
-      }
-      <style jsx>{`
-        input[name=password] + a.icon {
-          pointer-events: auto;
+    this.state = {
+      value: '',
+      hidden: true
+    }
+  }
+
+  render () {
+    const { error } = this.props
+    const inputClassNames = classnames('input', { 'is-danger': error })
+    const iconClassNames = classnames('fa', {
+      'fa-eye': this.state.hidden,
+      'fa-eye-slash': !this.state.hidden
+    })
+    const inputType = this.state.hidden ? 'password' : 'text'
+
+    return (
+      <div className='field password-component'>
+        <label className='label'>Mot de passe</label>
+        <p className='control has-icons-right'>
+          <input type={inputType} name='password' className={inputClassNames} placeholder='1 m0t D3 PaSs3 Tr3s C0mpL!qu3' required onChange={this.onChange} />
+          <a className='icon is-small is-right' onClick={this.toggle}>
+            <i className={iconClassNames} />
+          </a>
+        </p>
+        {
+          error
+            ? <ErrorMsg message={error} />
+            : ''
         }
-      `}</style>
-    </div>
-  )
+        <style jsx>{`
+          input[name=password] + a.icon {
+            pointer-events: auto;
+          }
+        `}</style>
+      </div>
+    )
+  }
+
+  onChange = e => {
+    this.setState({ value: e.target.value })
+
+    if (isFunction(this.props.onChange)) this.props.onChange(e)
+  }
+
+  toggle = e => {
+    this.setState({ hidden: !this.state.hidden })
+  }
 }
 
 export default Password
-
-// ----------------
-// Listeners
-// ----------------
-
-function toggle (e) {
-  e.preventDefault()
-
-  const $el = $(e.currentTarget)
-  const $input = $el.prev()
-
-  const currentType = $input.attr('type')
-
-  $el.find('i.fa')
-    .removeClass(currentType === 'password' ? 'fa-eye' : 'fa-eye-slash')
-    .addClass(currentType === 'password' ? 'fa-eye-slash' : 'fa-eye')
-
-  $input.attr('type', currentType === 'password' ? 'text' : 'password').focus()
-}
