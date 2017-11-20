@@ -18,7 +18,8 @@ class DetailsList extends Component {
   }
 
   render () {
-    const date = new Date(2017, 10)
+    const { year, month } = this.props
+    const date = new Date(year, month)
     const days = map(
       eachDay(startOfMonth(date), endOfMonth(date)),
       day => ({ date: day, entries: filter(this.timer.entries, entry => isSameDay(entry.start, day)) })
