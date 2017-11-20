@@ -15,7 +15,7 @@ class Password extends Component {
   }
 
   render () {
-    const { error } = this.props
+    const { error, required } = this.props
     const inputClassNames = classnames('input', { 'is-danger': error })
     const iconClassNames = classnames('fa', {
       'fa-eye': this.state.hidden,
@@ -27,7 +27,7 @@ class Password extends Component {
       <div className='field password-component'>
         <label className='label'>Mot de passe</label>
         <p className='control has-icons-right'>
-          <input type={inputType} name='password' className={inputClassNames} placeholder='1 m0t D3 PaSs3 Tr3s C0mpL!qu3' required onChange={this.onChange} />
+          <input type={inputType} name='password' className={inputClassNames} placeholder='1 m0t D3 PaSs3 Tr3s C0mpL!qu3' required={required} onChange={this.onChange} />
           <a className='icon is-small is-right' onClick={this.toggle}>
             <i className={iconClassNames} />
           </a>

@@ -26,6 +26,10 @@ const config = {
       path: '/api/users/me',
       method: 'get'
     },
+    updateUser: {
+      path: '/api/users/:id',
+      method: 'put'
+    },
     entries: {
       path: '/api/entries',
       method: 'get'

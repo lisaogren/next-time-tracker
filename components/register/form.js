@@ -34,7 +34,7 @@ class RegisterForm extends Component {
           <div className='column is-one-third-desktop is-offset-4-desktop is-half-tablet is-offset-3-tablet'>
             <Username error={errors.username} />
             <Email error={errors.email} />
-            <Password error={errors.password} />
+            <Password required error={errors.password} />
             <div className='field'>
               <div className='control actions'>
                 <button className='button is-primary'>S'inscrire</button>

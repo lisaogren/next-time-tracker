@@ -29,7 +29,7 @@ class LoginForm extends Component {
                 <input type='text' name='identifier' className='input' placeholder='jeanmichel@peupres.fr' required value={this.state.identifier} onChange={this.onChange} />
               </div>
             </div>
-            <Password onChange={this.resetLoginError} />
+            <Password required onChange={this.resetLoginError} />
             <LoginError />
             <div className='field'>
               <div className='control actions'>

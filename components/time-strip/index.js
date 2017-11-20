@@ -21,8 +21,12 @@ class TimeStrip extends Component {
         {this.scaleBlocks()}
         {this.workBlocks()}
         <style jsx global>{`
-          .columns:last-child {
-            margin-bottom: 0.75rem;
+          .timer-strip-component {
+            overflow: hidden;
+
+            .columns:last-child {
+              margin-bottom: 0.75rem;
+            }
           }
         `}</style>
       </div>

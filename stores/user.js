@@ -1,7 +1,7 @@
 import Router from 'next/router'
 import { observable, computed, action, createTransformer } from 'mobx'
 
-import { get, first, upperFirst, isFunction } from 'lodash'
+import { get, first, upperFirst, isFunction, extend } from 'lodash'
 
 import api from 'utils/api'
 import gravatar from 'utils/gravatar'
@@ -52,6 +52,10 @@ class UserStore {
     return this.data.register.success
   }
 
+  @computed get profileUpdated () {
+    return this.data.profile.updated
+  }
+
   // @computed get hasError () {
   //   return attr => {
   //     const invalidation = first(this.data.register.invalidAttributes[attr])
@@ -76,6 +80,10 @@ class UserStore {
 
   @action resetLoginError () {
     this.data.login.error = null
+  }
+
+  @action resetProfileUpdated () {
+    this.data.profile.updated = false
   }
 
   @action register = async ({ username, email, password }) => {
@@ -136,6 +144,7 @@ class UserStore {
   }
 
   @action me = async (cb) => {
+    // @TODO Handle errors
     const response = await api.me()
 
     this.data.user = response.data
@@ -151,6 +160,18 @@ class UserStore {
     if (isFunction(cb)) cb()
   }
 
+  @action updateMe = async (data) => {
+    const params = { id: this.user.id }
+
+    // Need to pass user id as data aswell or sails-auth f!&*¤° up without telling us
+    data.id = this.user.id
+
+    const response = await api.updateUser({ params, data })
+
+    this.data.user = extend(this.data.user, response.data)
+    this.data.profile.updated = true
+  }
+
   @action reset () {
     this.data = {
       loaded: false,
@@ -163,6 +184,9 @@ class UserStore {
       },
       login: {
         error: null
+      },
+      profile: {
+        updated: false
       }
     }
   }
