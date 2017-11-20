@@ -32,16 +32,18 @@ class TimeStrip extends Component {
   workBlocks () {
     const { date, entries } = this.props
 
-    const start = setHours(startOfDay(date), 6)
+    const startOfStrip = setHours(startOfDay(date), 6)
     const blocks = []
 
     forEach(entries, (entry) => {
-      if (entry.end) {
-        const left = oneHourInPercent * differenceInDecimalHours(entry.start, start)
-        const width = (oneHourInPercent * differenceInDecimalHours(entry.end, start)) - left
+      let { start, end } = entry
 
-        blocks.push({ left, width, entry })
-      }
+      if (!entry.end) end = new Date()
+
+      const left = oneHourInPercent * differenceInDecimalHours(start, startOfStrip)
+      const width = (oneHourInPercent * differenceInDecimalHours(end, startOfStrip)) - left
+
+      blocks.push({ left, width, entry })
     })
 
     return (
@@ -62,14 +64,20 @@ class TimeStrip extends Component {
     const left = `${block.left}%`
     const width = `${block.width}%`
 
+    const ongoing = !block.entry.end
+
+    const classes = classnames('column', 'worked', { ongoing })
+    const title = ongoing
+      ? 'Période en cours'
+      : 'Click pour modifier cette période'
+
     return (
       <div
         key={block.entry.id}
-        className='column worked'
-        data-id={block.entry.id}
+        className={classes}
         data-type='worked'
         style={{ left, width }}
-        title='Click pour modifier cette période'
+        title={title}
         onClick={partial(this.edit, block.entry)}
       >
         <style jsx>{`
@@ -82,6 +90,10 @@ class TimeStrip extends Component {
             padding: 0;
             height: 100%;
             cursor: pointer;
+
+            &.ongoing {
+              background: #23d160;
+            }
           }
         `}</style>
       </div>
@@ -124,6 +136,11 @@ class TimeStrip extends Component {
 
   edit = (entry, e) => {
     e.stopPropagation()
+
+    if (!entry.end) {
+      return window.alert(`Impossible de modifier une période en cours.\nVa sur le résumé pour arrêter le timer d'abord.`)
+    }
+
     this.timer.edit(entry)
   }
 }

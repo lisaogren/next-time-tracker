@@ -25,8 +25,9 @@
 * [x] Add/Edit modal w/ flatpickr
 * [x] Preset actions: Set normal work day, delete all day data
 * [x] Extract button generating an Excel file
-* [ ] Year/Month selector
-* [ ] Display current entry data adding a `Date.now()` to the `end` attribute to make it visualizable
+* [x] Year/Month selector
+* [x] Display current entry data adding a `Date.now()` to the `end` attribute to make it visualizable
+* [ ] Set a limit to current entry data display to end of time strip
 
 ## Settings
 * [ ] Configure normal work day entries
@@ -41,3 +42,4 @@
 * [ ] Implement service worker
 * [ ] Setup email API
 * [ ] Secure API with policies
+* [ ] i18n a11y

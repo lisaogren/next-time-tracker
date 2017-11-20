@@ -55,10 +55,7 @@ class Details extends Component {
     )
   }
 
-  selectDate = ({ year, month }) => {
-    console.log(year, month)
-    this.setState({ year, month })
-  }
+  selectDate = ({ year, month }) => this.setState({ year, month })
 }
 
 export default Details

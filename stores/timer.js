@@ -99,6 +99,7 @@ class TimerStore {
     const user = this.app.userStore.user.id
     const data = { start, end, user }
 
+    // @TODO Handle network errors
     let response
     if (id) {
       const params = { id }
@@ -112,8 +113,17 @@ class TimerStore {
     this.app.userStore.me()
   }
 
-  @action del = async () => {
+  @action del = async (id) => {
+    const params = { id }
 
+    try {
+      await api.deleteEntry({ params })
+    } catch (err) {
+      // Do something with error
+    }
+
+    this.resetEdit()
+    this.app.userStore.me()
   }
 
   @action setNormalWorkTime = async (date) => {
