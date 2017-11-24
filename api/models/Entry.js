@@ -9,7 +9,7 @@ module.exports = {
   attributes: {
     type: {
       type: 'string',
-      enum: ['work', 'holiday']
+      enum: ['work', 'holiday', 'settings']
     },
     start: {
       type: 'datetime'

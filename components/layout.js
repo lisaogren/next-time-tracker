@@ -22,6 +22,21 @@ class Layout extends Component {
         <Header />
         {this.props.children}
         {process.env.NODE_ENV !== 'production' ? <DevTools /> : null}
+        <style jsx global>{`
+          .container > h1.title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .icon-component {
+              margin-right: .5rem;
+
+              i.fa {
+                font-size: 1.5rem;
+              }
+            }
+          }
+        `}</style>
       </Container>
     )
   }

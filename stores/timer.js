@@ -19,7 +19,8 @@ class TimerStore {
   @observable data = {
     add: null,
     edit: null,
-    entries: []
+    entries: [],
+    settings: []
   }
 
   // ----------------
@@ -28,6 +29,10 @@ class TimerStore {
 
   @computed get entries () {
     return this.data.entries
+  }
+
+  @computed get settings () {
+    return this.data.settings
   }
 
   @computed get entriesIsEmpty () {
@@ -53,7 +58,11 @@ class TimerStore {
   // ----------------
 
   @action setEntries = (entries) => {
-    this.data.entries = sortBy(entries, ['start'])
+    const workEntries = filter(entries, { type: 'work' })
+    const settingEntries = filter(entries, { type: 'settings' })
+
+    this.data.entries = sortBy(workEntries, ['start'])
+    this.data.settings = sortBy(settingEntries, ['start'])
   }
 
   @action start = async (user) => {
@@ -82,8 +91,9 @@ class TimerStore {
     entry = merge(entry, response.data)
   }
 
-  @action add = (date) => {
-    this.data.add = { date }
+  @action add = ({ type, date }) => {
+    date = date || new Date()
+    this.data.add = { type, date }
   }
 
   @action edit = (entry) => {
@@ -95,9 +105,9 @@ class TimerStore {
     this.data.add = null
   }
 
-  @action save = async ({ id, start, end }) => {
+  @action save = async ({ id, type, start, end }) => {
     const user = this.app.userStore.user.id
-    const data = { start, end, user }
+    const data = { type, start, end, user }
 
     // @TODO Handle network errors
     let response

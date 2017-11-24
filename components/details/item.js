@@ -49,8 +49,8 @@ class DetailsItem extends Component {
             {entries.length ? deleteBtn : null}
           </span>
         </td>
-        <td className='time-strip-container' title='Click pour ajouter une période' onClick={this.add}>
-          <TimeStrip date={date} entries={entries} />
+        <td className='time-strip-container'>
+          <TimeStrip date={date} entries={entries} add={this.add} edit={this.edit} />
         </td>
 
         <style jsx>{`
@@ -84,10 +84,6 @@ class DetailsItem extends Component {
               }
             }
 
-            .time-strip-container {
-              cursor: copy;
-            }
-
             &.is-weekend {
               background-color: #f5f5f5;
 
@@ -102,7 +98,18 @@ class DetailsItem extends Component {
   }
 
   add = () => {
-    this.timer.add(this.props.date)
+    this.timer.add({
+      type: 'work',
+      date: this.props.date
+    })
+  }
+
+  edit = (entry) => {
+    if (!entry.end) {
+      return window.alert(`Impossible de modifier une période en cours.\nVa sur le résumé pour arrêter le timer d'abord.`)
+    }
+
+    this.timer.edit(entry)
   }
 
   setNormalWorkTime = () => {

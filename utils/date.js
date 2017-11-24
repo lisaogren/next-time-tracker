@@ -26,6 +26,10 @@ export function differenceInDecimalHours (end, start) {
   return differenceInMilliseconds(end, start) / oneHourInMilliseconds
 }
 
+export function millisecondsToDecimalHours (duration) {
+  return duration / oneHourInMilliseconds
+}
+
 export function getNoon (date) {
   return new Date(getYear(date), getMonth(date), getDate(date), 12)
 }

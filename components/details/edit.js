@@ -69,10 +69,10 @@ class DetailsEdit extends Component {
   save = (e) => {
     e.preventDefault()
 
-    const { id } = this.state.data
+    const { id, type } = this.state.data
     const { start, end } = this.state
 
-    this.timer.save({ id, start, end })
+    this.timer.save({ id, type, start, end })
   }
 
   close = () => {

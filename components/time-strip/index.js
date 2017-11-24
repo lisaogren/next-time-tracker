@@ -1,6 +1,6 @@
 import { Component } from 'react'
-import { inject } from 'mobx-react'
-import { forEach, range, partial } from 'lodash'
+import { observer } from 'mobx-react'
+import { forEach, range, partial, isFunction } from 'lodash'
 import { setHours, startOfDay } from 'date-fns'
 import classnames from 'classnames'
 
@@ -8,21 +8,16 @@ import { differenceInDecimalHours } from 'utils/date'
 
 const oneHourInPercent = 100 / 14
 
-@inject('timerStore')
+@observer
 class TimeStrip extends Component {
-  constructor (props) {
-    super(props)
-    this.timer = props.timerStore
-  }
-
   render () {
     return (
-      <div className='time-strip-component'>
+      <div className='time-strip-component' title='Click pour ajouter une période' onClick={this.add}>
         {this.scaleBlocks()}
         {this.workBlocks()}
-        <style jsx global>{`
-          .timer-strip-component {
-            overflow: hidden;
+        <style jsx>{`
+          .time-strip-component {
+            cursor: copy;
 
             .columns:last-child {
               margin-bottom: 0.75rem;
@@ -58,6 +53,7 @@ class TimeStrip extends Component {
             position: relative;
             height: 1rem;
             margin-top: -0.5rem;
+            overflow: hidden;
           }
         `}</style>
       </div>
@@ -121,31 +117,38 @@ class TimeStrip extends Component {
   }
 
   scaleBlock = (i) => {
-    const classes = classnames('column', {
-      'is-hidden': i < 6 || i > 19
-    })
+    if (i < 6 || i > 19) return null
+
     return (
-      <div key={i} className={classes}>
+      <div key={i} className='column'>
         {i}h
         <style jsx>{`
           .column {
             padding: 0 0 0 0.25rem;
             border-left: black solid 1px;
             box-sizing: border-box;
+
+            :last-child {
+              border-right: black solid 1px;
+            }
           }
         `}</style>
       </div>
     )
   }
 
+  add = (e) => {
+    if (isFunction(this.props.add)) {
+      this.props.add()
+    }
+  }
+
   edit = (entry, e) => {
     e.stopPropagation()
 
-    if (!entry.end) {
-      return window.alert(`Impossible de modifier une période en cours.\nVa sur le résumé pour arrêter le timer d'abord.`)
+    if (isFunction(this.props.edit)) {
+      this.props.edit(entry)
     }
-
-    this.timer.edit(entry)
   }
 }
 
