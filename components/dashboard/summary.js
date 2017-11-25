@@ -75,8 +75,8 @@ class Summary extends Component {
 
   getBalance (type) {
     const now = new Date()
+    let { entries, normalWorkDay } = this.timer
 
-    let entries = this.timer.entries
     let start
     let end
 
@@ -99,7 +99,7 @@ class Summary extends Component {
       }
     }
 
-    return getWorkTimeBalance(entries, start, end)
+    return getWorkTimeBalance({ entries, start, end, normalWorkDay })
   }
 
   getWorkTime () {

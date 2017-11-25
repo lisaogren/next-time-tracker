@@ -17,15 +17,17 @@ module.exports = {
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
-  // models: {
-  //   connection: 'someMysqlServer'
-  // },
+  models: {
+    connection: 'productionMysqlServer'
+    // connection: 'developmentMysqlServer'
+  },
 
   /***************************************************************************
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: 1337,
+  port: 2345,
+  // port: 1337,
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
@@ -35,10 +37,6 @@ module.exports = {
   //   level: "silent"
   // }
 
-  models: {
-    connection: 'developmentMysqlServer'
-  },
-
-  appUrl: 'http://localhost:1337'
-
+  // appUrl: 'http://localhost:1337'
+  appUrl: 'https://timer-tracker.carlogren.com'
 }

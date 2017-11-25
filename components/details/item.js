@@ -20,8 +20,9 @@ class DetailsItem extends Component {
 
   render () {
     const { date, entries } = this.props
+    const { normalWorkDay } = this.timer
 
-    const workTime = getWorkTimeBalance(entries, date)
+    const workTime = getWorkTimeBalance({ entries, date, normalWorkDay })
     const trClasses = classnames('entry', {
       'is-weekend': !isWorkDay(date)
     })

@@ -1,12 +1,9 @@
 import { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import { first, map } from 'lodash'
-import { getHours, getMinutes, setHours, setMinutes } from 'date-fns'
+import { first, map, isEmpty } from 'lodash'
 import { getCumulatedWorkTime, millisecondsToDuration } from 'utils/date'
 
 import TimeStrip from 'components/time-strip/index'
-
-import DetailsEdit from 'components/details/edit'
 
 @inject('timerStore') @observer
 class NormalWorkDaySettings extends Component {
@@ -18,34 +15,11 @@ class NormalWorkDaySettings extends Component {
 
   render () {
     let date
-    let entries
-    const entry = first(this.timer.settings)
+    const entries = this.timer.settings
+    const entry = first(entries)
 
     // WTF!?
-    if (entry) {
-      date = entry.start
-
-      entries = map(this.timer.settings, entry => {
-        const { id, type } = entry
-        let hours = getHours(entry.start)
-        let minutes = getMinutes(entry.start)
-
-        const start = setMinutes(setHours(date, hours), minutes)
-
-        hours = getHours(entry.end)
-        minutes = getMinutes(entry.end)
-
-        const end = setMinutes(setHours(date, hours), minutes)
-
-        return { start, end, id, type }
-      })
-
-      console.log(entries)
-    }
-
-    const totalWorkTime = millisecondsToDuration({
-      time: getCumulatedWorkTime(entries)
-    })
+    if (entry) date = entry.start
 
     return (
       <form className='form normal-work-day-component'>
@@ -53,25 +27,43 @@ class NormalWorkDaySettings extends Component {
           <div className='column is-half-desktop is-offset-3-desktop is-three-fifths-tablet is-offset-one-fifth-tablet'>
             <div className='field'>
               <label className='label'>Journée type</label>
+              <p>
+                Défini les horaires et la durée d'une journée typique de travail.<br />
+                Les calculs d'heures supplémentaires dépendent de ce paramètres.<br />
+                <em>Par défaut, la journée type est défini d'une durée de 7h30.</em>
+              </p>
               <div className='control time-strip-control'>
                 <TimeStrip date={date} entries={entries} add={this.add} edit={this.edit} />
               </div>
-              <div className='control'>
-                <b>Heures à travailler :</b> {totalWorkTime}
-              </div>
+              {this.totalWorkTime()}
             </div>
           </div>
         </div>
-        {this.timer.adding ? <DetailsEdit add={this.timer.adding} /> : null}
-        {this.timer.editing ? <DetailsEdit edit={this.timer.editing} /> : null}
         <style jsx>{`
           .time-strip-control {
             padding: 1rem;
             border: black solid 1px;
+            margin-top: .5rem;
             margin-bottom: .5rem;
           }
         `}</style>
       </form>
+    )
+  }
+
+  totalWorkTime () {
+    const entries = this.timer.settings
+
+    if (isEmpty(entries)) return null
+
+    const totalWorkTime = millisecondsToDuration({
+      time: getCumulatedWorkTime(entries)
+    })
+
+    return (
+      <div className='control'>
+        <b>Durée totale :</b> {totalWorkTime}
+      </div>
     )
   }
 

@@ -117,11 +117,16 @@ export function getWorkDays (start, end) {
   return filter(eachDay(start, end), day => isWorkDay(day))
 }
 
-export function getWorkTimeBalance (entries, start, end) {
-  if (!end) end = start
+export function getWorkTimeBalance ({ entries, start, end, date, normalWorkDay }) {
+  if (date) {
+    start = date
+    end = date
+  }
+
+  if (!normalWorkDay) normalWorkDay = 7.5
 
   const days = getWorkDays(start, end)
-  const max = days.length * (7.5 * oneHourInMilliseconds)
+  const max = days.length * (normalWorkDay * oneHourInMilliseconds)
 
   const workTime = getCumulatedWorkTime(entries)
 

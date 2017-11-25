@@ -1,8 +1,8 @@
 import { observable, computed, action } from 'mobx'
-import { isEmpty, last, merge, filter, map, sortBy } from 'lodash'
+import { isEmpty, last, merge, filter, map, sortBy, first } from 'lodash'
+import { isSameDay, setMinutes, setHours, getHours, getMinutes } from 'date-fns'
 
-import { isSameDay, setMinutes, setHours } from 'date-fns'
-
+import { getCumulatedWorkTime, millisecondsToDecimalHours } from 'utils/date'
 import api from 'utils/api'
 
 class TimerStore {
@@ -32,7 +32,26 @@ class TimerStore {
   }
 
   @computed get settings () {
-    return this.data.settings
+    const entry = first(this.data.settings)
+
+    if (!entry) return this.data.settings
+
+    const date = entry.start
+
+    return map(this.data.settings, entry => {
+      const { id, type } = entry
+      let hours = getHours(entry.start)
+      let minutes = getMinutes(entry.start)
+
+      const start = setMinutes(setHours(date, hours), minutes)
+
+      hours = getHours(entry.end)
+      minutes = getMinutes(entry.end)
+
+      const end = setMinutes(setHours(date, hours), minutes)
+
+      return { start, end, id, type }
+    })
   }
 
   @computed get entriesIsEmpty () {
@@ -51,6 +70,12 @@ class TimerStore {
 
   @computed get editing () {
     return this.data.edit
+  }
+
+  @computed get normalWorkDay () {
+    return millisecondsToDecimalHours(
+      getCumulatedWorkTime(this.settings)
+    )
   }
 
   // ----------------
@@ -139,11 +164,31 @@ class TimerStore {
   @action setNormalWorkTime = async (date) => {
     await this.deleteEntries(date)
 
+    let entries
+
     const user = this.app.userStore.user.id
-    const entries = [
-      { type: 'work', start: setMinutes(setHours(date, 8), 30), end: setMinutes(setHours(date, 12), 0), user },
-      { type: 'work', start: setMinutes(setHours(date, 13), 0), end: setMinutes(setHours(date, 17), 0), user }
-    ]
+    const settings = this.settings
+
+    if (!isEmpty(settings)) {
+      entries = map(settings, ({ start, end }) => {
+        let hours = getHours(start)
+        let minutes = getMinutes(start)
+
+        start = setMinutes(setHours(date, hours), minutes)
+
+        hours = getHours(end)
+        minutes = getMinutes(end)
+
+        end = setMinutes(setHours(date, hours), minutes)
+
+        return { type: 'work', start, end, user }
+      })
+    } else {
+      entries = [
+        { type: 'work', start: setMinutes(setHours(date, 8), 30), end: setMinutes(setHours(date, 12), 0), user },
+        { type: 'work', start: setMinutes(setHours(date, 13), 0), end: setMinutes(setHours(date, 17), 0), user }
+      ]
+    }
 
     await this.addEntries(entries)
 

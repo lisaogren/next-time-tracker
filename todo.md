@@ -30,9 +30,9 @@
 * [ ] Set a limit to current entry data display to end of time strip
 
 ## Settings
-* [ ] Configure normal work day entries
-* [ ] Determine normal balance from normal work day entries
-* [ ] Determine normal lunch period / breaks from normal work day entries
+* [x] Configure normal work day entries
+* [x] Determine normal balance from normal work day entries
+* [ ] Determine normal lunch period / breaks from normal work day entries (not useful for now)
 
 ## Profile
 * [x] Edit connection info (username, email, password)
