@@ -7,10 +7,10 @@ export default (props) => {
     <div className='content has-text-centered'>
       <h3>Tu as déjà un compte ?!</h3>
       <p>
-        Mais quesque tu fais là !
+        Mais que fais-tu là ?!
         <Link href='/login'>
           <a className='login-link'>
-            <span>Connectes-toi</span>
+            <span>Connecte-toi</span>
             <Icon name='sign-in' fontSize='1rem' />
           </a>
         </Link>
