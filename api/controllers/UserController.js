@@ -5,7 +5,7 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-/* globals User */
+/* globals sails User */
 
 const get = require('lodash/get')
 const merge = require('lodash/merge')
@@ -21,6 +21,22 @@ const controller = {
       .populate('entries')
       .then(user => res.ok(user))
       .catch(() => res.ok(null))
+  },
+
+  create (req, res) {
+    sails.services.passport.protocols.local.register(req.body, function (err, user) {
+      if (err) return res.negotiate(err)
+
+      const to = user.email
+      const subject = 'Création de compte Time Tracker'
+      const html = `<h2>Bienvenue ${user.username} !</h2><p>A bientôt sur https://time-tracker.carlogren.com</p>`
+
+      sails.services.mailgun.send({ to, subject, html }, (err) => {
+        if (err) return res.negotiate(err)
+
+        res.ok(user)
+      })
+    })
   }
 }
 

@@ -30,6 +30,11 @@ class RegisterSuccess extends Component {
             pour utiliser Time Tracker !
           </p>
         </div>
+        <style jsx>{`
+          h3 > span {
+            margin-right: .5rem;
+          }
+        `}</style>
       </div>
     )
   }
