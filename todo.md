@@ -5,8 +5,6 @@
 * [x] Display warning if user hasn't validated their email
   * [x] Re-send validation email
 
-----
-
 ## Pages
 
 ### Home
@@ -51,8 +49,6 @@
 * [ ] Create admin user rights
 * [ ] Admin page with lots of options \o/
   * [ ] User manager
-
-----
 
 ## Technical chanlenges
 * [ ] Figure out upload w/ progress using axios
