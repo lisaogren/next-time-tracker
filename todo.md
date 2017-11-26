@@ -41,6 +41,13 @@
 ## Technical chanlenges
 * [ ] Figure out upload w/ progress (axios?)
 * [ ] Implement service worker
-* [ ] Setup email API
+* [x] Setup email service using mailgun
 * [ ] Secure API with policies
 * [ ] i18n a11y
+* [ ] Integrate Mobx with getInitialProps (https://github.com/zeit/next.js/pull/3260)
+* [ ] Integrate `utils/api` with `waterline`
+
+# Admin
+* [ ] Create admin user rights
+* [ ] Admin page with lots of options \o/
+  * [ ] User manager
