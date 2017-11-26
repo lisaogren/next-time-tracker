@@ -1,8 +1,4 @@
-# Todo
-
-`next-time-tracker` todos
-
-----
+# Time Tracker Todos
 
 ## Global
 * [x] Favicon
@@ -59,10 +55,11 @@
 ----
 
 ## Technical chanlenges
-* [ ] Figure out upload w/ progress (axios?)
+* [ ] Figure out upload w/ progress using axios
 * [ ] Implement service worker
 * [x] Setup email service using mailgun
 * [ ] Secure API with policies
-* [ ] i18n a11y
+* [ ] i18n/a11y
 * [ ] Integrate Mobx with getInitialProps (https://github.com/zeit/next.js/pull/3260)
 * [ ] Integrate `utils/api` with `waterline`
+* [ ] Use better mysql migration than mysql dump/restore for production
