@@ -4,18 +4,27 @@ const rand = require('random-key')
 
 module.exports = {
   send (user, next) {
-    Validation.destroy({ type: 'email', user: user.id })
-      .then(() => {
-        const newValidation = {
-          key: rand.generate(128),
-          user: user.id
-        }
+    const criteria = { type: 'email', user: user.id }
 
-        Validation.create(newValidation)
-          .then(createdValidation => this.sendEmail(user, createdValidation, next))
-          .catch(() => next(new Error('cannot create')))
+    Validation.find(criteria).then(validations => {
+      if (!validations) return
+
+      return Validation.destroy(criteria).catch(err => {
+        sails.log.error('services/validation: Could not reset validations', err)
+
+        throw new Error('cannot reset')
       })
-      .catch(() => next(new Error('cannot reset')))
+    })
+    .then(() => {
+      const newValidation = {
+        key: rand.generate(128),
+        user: user.id
+      }
+
+      Validation.create(newValidation)
+        .then(createdValidation => this.sendEmail(user, createdValidation, next))
+        .catch(() => next(new Error('cannot create')))
+    })
   },
 
   validate (key, next) {
