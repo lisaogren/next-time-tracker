@@ -37,6 +37,9 @@ module.exports = {
   //   level: "silent"
   // }
 
-  // appUrl: 'http://localhost:1337'
-  appUrl: 'https://timer-tracker.carlogren.com'
+  // appUrl: 'http://localhost:1337',
+  appUrl: 'https://timer-tracker.carlogren.com',
+
+  // Keep blueprints error details in request body in production
+  keepResponseErrors: true
 }

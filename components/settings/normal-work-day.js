@@ -18,7 +18,6 @@ class NormalWorkDaySettings extends Component {
     const entries = this.timer.settings
     const entry = first(entries)
 
-    // WTF!?
     if (entry) date = entry.start
 
     return (

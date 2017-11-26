@@ -13,9 +13,9 @@
 
 ## Register
 * [ ] Catch and display technical errors e.g. network problems
+* [x] Functionnal errors not displaying in production (400 error without body)
 
 ## Dashboard
-* [ ] Find better name
 * [x] Listen to spacebar to start/stop timer
 * [ ] Display counter in real-time with a setInterval
 * [ ] Smart detection of timer staying on all night

@@ -6,6 +6,7 @@ import urlComposer from 'url-composer'
 const host = process.env.NODE_ENV === 'production'
   ? 'https://time-tracker.carlogren.com'
   : 'http://localhost:1337'
+// const host = 'http://localhost:1337'
 
 const config = {
   host,
