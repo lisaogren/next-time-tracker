@@ -4,8 +4,9 @@ import DevTools from 'mobx-react-devtools'
 
 // import { appStore as app } from 'stores'
 
-import { Container } from 'components/bulma'
-import Header from './header'
+import { Container } from 'components/bulma/index'
+import Header from 'components/header/index'
+import ValidateEmailWarning from 'components/validate-email/warning'
 // import Loading from './loading'
 
 @observer
@@ -20,6 +21,7 @@ class Layout extends Component {
     return (
       <Container fluid>
         <Header />
+        <ValidateEmailWarning />
         {this.props.children}
         {process.env.NODE_ENV !== 'production' ? <DevTools /> : null}
         <style jsx global>{`

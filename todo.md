@@ -1,26 +1,39 @@
 # Todo
 
+`next-time-tracker` todos
+
+----
+
 ## Global
 * [x] Favicon
+* [x] Display warning if user hasn't validated their email
+  * [x] Re-send validation email
 
-## Home
+----
+
+## Pages
+
+### Home
 * [ ] Customize page for logged in user
 
-## Login
+### Login
 * [x] Display login errors
 * [ ] Create forgot password procedure
-* [ ] Validate email after login
+* [x] Validate email after login
 
-## Register
+### Register
 * [ ] Catch and display technical errors e.g. network problems
 * [x] Functionnal errors not displaying in production (400 error without body)
 
-## Dashboard
+### Validate email
+* [x] Re-send validation email
+
+### Dashboard
 * [x] Listen to spacebar to start/stop timer
 * [ ] Display counter in real-time with a setInterval
 * [ ] Smart detection of timer staying on all night
 
-## Details
+### Details
 * [x] Create time-strip component
 * [x] Add/Edit modal w/ flatpickr
 * [x] Preset actions: Set normal work day, delete all day data
@@ -29,14 +42,21 @@
 * [x] Display current entry data adding a `Date.now()` to the `end` attribute to make it visualizable
 * [ ] Set a limit to current entry data display to end of time strip
 
-## Settings
+### Settings
 * [x] Configure normal work day entries
 * [x] Determine normal balance from normal work day entries
 * [ ] Determine normal lunch period / breaks from normal work day entries (not useful for now)
 
-## Profile
+### Profile
 * [x] Edit connection info (username, email, password)
 * [ ] Handle errors (network, username/email taken or wrong format, password not strong enough)
+
+### Admin
+* [ ] Create admin user rights
+* [ ] Admin page with lots of options \o/
+  * [ ] User manager
+
+----
 
 ## Technical chanlenges
 * [ ] Figure out upload w/ progress (axios?)
@@ -46,8 +66,3 @@
 * [ ] i18n a11y
 * [ ] Integrate Mobx with getInitialProps (https://github.com/zeit/next.js/pull/3260)
 * [ ] Integrate `utils/api` with `waterline`
-
-# Admin
-* [ ] Create admin user rights
-* [ ] Admin page with lots of options \o/
-  * [ ] User manager

@@ -13,6 +13,10 @@ const User = {
     entries: {
       collection: 'entry',
       via: 'user'
+    },
+    validations: {
+      collection: 'validation',
+      via: 'user'
     }
   }
 }

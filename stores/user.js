@@ -1,7 +1,7 @@
 import Router from 'next/router'
 import { observable, computed, action, createTransformer } from 'mobx'
 
-import { get, first, upperFirst, isFunction, extend } from 'lodash'
+import { get, find, first, upperFirst, isFunction, extend } from 'lodash'
 
 import api from 'utils/api'
 import gravatar from 'utils/gravatar'
@@ -54,6 +54,16 @@ class UserStore {
 
   @computed get profileUpdated () {
     return this.data.profile.updated
+  }
+
+  @computed get validations () {
+    return this.user.validations
+  }
+
+  @computed get isEmailValidated () {
+    const validation = find(this.validations, { type: 'email' })
+
+    return validation && validation.validated
   }
 
   // @computed get hasError () {
@@ -170,6 +180,15 @@ class UserStore {
 
     this.data.user = extend(this.data.user, response.data)
     this.data.profile.updated = true
+  }
+
+  @action resendEmailValidation = async () => {
+    const { id } = this.user
+    const params = { id }
+
+    await api.resendEmailValidation({ params })
+
+    return { ok: true }
   }
 
   @action reset () {

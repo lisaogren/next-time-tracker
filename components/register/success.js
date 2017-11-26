@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 
@@ -21,13 +20,13 @@ class RegisterSuccess extends Component {
             <Icon name='smile-o' />
           </h3>
           <p>
-            Il ne te reste plus qu'a te connecter via
-            &nbsp;
-            <Link href='/login'>
-              <a>le formulaire de connexion</a>
-            </Link>
-            &nbsp;
-            pour utiliser Time Tracker !
+            Tu devrais recevoir un e-mail automatique avec un lien. Clique ce lien pour valider ton adresse e-mail.
+          </p>
+          <p>
+            Si tu n'as pas reçu l'e-mail <a onClick={this.resendEmailValidation}>clique ici</a> pour le recevoir à nouveau.
+          </p>
+          <p>
+            Sinon tu peux fermer cette page.
           </p>
         </div>
         <style jsx>{`
@@ -37,6 +36,14 @@ class RegisterSuccess extends Component {
         `}</style>
       </div>
     )
+  }
+
+  resendEmailValidation = e => {
+    e.preventDefault()
+
+    this.store.resendEmailValidation().then(() => {
+      window.alert('E-mail de validation renvoyé')
+    })
   }
 }
 

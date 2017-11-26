@@ -24,16 +24,14 @@ const config = {
       method: 'post'
     },
     me: {
-      path: '/api/users/me',
-      method: 'get'
+      path: '/api/users/me'
     },
     updateUser: {
       path: '/api/users/:id',
       method: 'put'
     },
     entries: {
-      path: '/api/entries',
-      method: 'get'
+      path: '/api/entries'
     },
     addEntry: {
       path: '/api/entries',
@@ -46,6 +44,9 @@ const config = {
     deleteEntry: {
       path: '/api/entries/:id',
       method: 'delete'
+    },
+    resendEmailValidation: {
+      path: '/api/validations/:id/resend'
     }
   }
 }
@@ -66,19 +67,12 @@ function request (serviceName, options = {}) {
   })
 
   return http({
-    method: service.method,
+    method: service.method || 'get',
     url,
     data,
     headers: { 'X-Requested-With': 'XMLHttpRequest' },
     withCredentials: true
   })
-    // .then((response) => {
-    //   if (error) return reject(error)
-    //   else if (response.statusCode >= 500) return resolve({ error: true, type: 'technical', xhr: response })
-    //   else if (response.statusCode >= 400) return resolve({ error: true, type: 'functional', xhr: response })
-
-    //   return response
-    // })
 }
 
 const api = {

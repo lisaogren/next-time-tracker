@@ -44,4 +44,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  'get /validate-email/:key': 'ValidationController.validate',
+  'get /api/validations/:user/resend': 'ValidationController.resend'
+
 }
