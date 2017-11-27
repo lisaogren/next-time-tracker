@@ -64,7 +64,7 @@ module.exports = {
       <h2>Hello ${user.username} !</h2>
       <p>Valide ton adresse e-mail en cliquant sur le lien suivant pour accéder à ton compte :</p>
       <p>
-        <a href="${sails.config.appUrl}/validate-email/${validation.key}">Valider mon adresse e-mail</a>
+        <a href="${sails.config.appUrl}/validate-email/${validation.key}">${sails.config.appUrl}/validate-email/${validation.key}</a>
       </p>
       <p>
         A bientôt sur <a href="${sails.config.appUrl}">Time Tracker</a>

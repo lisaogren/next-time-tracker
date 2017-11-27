@@ -24,7 +24,7 @@ module.exports = {
 
 // Helpers
 function getMailOptions (options) {
-  const mailConfigKeys = ['from', 'subject', 'replyTo'];
+  const mailConfigKeys = ['from', 'subject', 'replyTo']
 
   return extend({}, pick(sails.config.mailgun, mailConfigKeys), options)
 }
