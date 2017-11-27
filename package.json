@@ -10,7 +10,6 @@
     "bulma": "^0.6.1",
     "classnames": "^2.2.5",
     "date-fns": "^1.29.0",
-    "dominus": "^6.0.2",
     "flatpickr": "^4.1.0",
     "form-serialize": "^0.7.2",
     "gravatar": "^1.6.0",
@@ -27,7 +26,6 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-flatpickr": "^3.6.2",
-    "react-i18next": "^6.1.0",
     "sails": "~0.12.8",
     "sails-auth": "github:RasCarlito/sails-auth#6c7f56460715951ab7dac3a8135faef8931095c4",
     "sails-disk": "~0.10.9",
@@ -50,7 +48,7 @@
     "url": "git://github.com/rascarlito/next-time-tracker.git"
   },
   "author": "rascarlito",
-  "license": "",
+  "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^8.0.1",
     "babel-plugin-module-resolver": "^2.7.1",
